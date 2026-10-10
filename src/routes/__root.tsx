@@ -14,6 +14,7 @@ import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { VkProvider } from "../lib/vk-store";
+import { DemoLabProvider } from "../lib/demo-lab-store";
 import { AppShell } from "../components/vk/Shell";
 
 function NotFoundComponent() {
@@ -97,10 +98,12 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <VkProvider>
-        <AppShell>
-          <Outlet />
-        </AppShell>
-        <Toaster theme="dark" position="bottom-right" toastOptions={{ className: "font-sans" }} />
+        <DemoLabProvider>
+          <AppShell>
+            <Outlet />
+          </AppShell>
+          <Toaster theme="dark" position="bottom-right" toastOptions={{ className: "font-sans" }} />
+        </DemoLabProvider>
       </VkProvider>
     </QueryClientProvider>
   );

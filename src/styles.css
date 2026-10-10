@@ -42,6 +42,16 @@
   --color-terrain: var(--terrain);
   --color-terrain-2: var(--terrain-2);
   --color-water: var(--water);
+  --color-vk-bg: #07110E;
+  --color-vk-sidebar: #0B1712;
+  --color-vk-panel: #101F18;
+  --color-vk-panel-2: #162B21;
+  --color-vk-border: #263A30;
+  --color-vk-primary: #55D6A3;
+  --color-vk-warning: #F4A62A;
+  --color-vk-alert: #F05B51;
+  --color-vk-text: #E8F0EB;
+  --color-vk-text-muted: #8C9F92;
 }
 
 :root {
@@ -128,3 +138,17 @@
 @utility anim-dash { animation: vk-dash 1.6s linear infinite; }
 @utility anim-in { animation: vk-in 0.28s ease-out both; }
 @utility anim-sweep { transform-box: view-box; transform-origin: 200px 200px; animation: vk-sweep 6s linear infinite; }
+
+@utility vk-scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.35) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+}
+

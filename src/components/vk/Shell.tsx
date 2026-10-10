@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Bell, Search, Settings, User, LayoutDashboard, Activity, MapPinned, Network, LayoutGrid, RotateCcw, X, ClipboardCheck } from "lucide-react";
+import { Bell, Search, Settings, User, LayoutDashboard, Activity, MapPinned, Network, LayoutGrid, RotateCcw, X, ClipboardCheck, Camera, Radio, GitFork, PlaySquare, FlaskConical } from "lucide-react";
 import { useVk } from "@/lib/vk-store";
 import { VkButton } from "./ui";
 import { ReviewDrawer } from "./ReviewDrawer";
@@ -23,12 +23,19 @@ export function SimulationBadge({ text = "SIMULATION MODE — ALL DATA FICTIONAL
   );
 }
 
-const NAV = [
+const CORE_NAV = [
   { to: "/", icon: LayoutDashboard, label: "Forest Monitoring" },
   { to: "/correlation", icon: Activity, label: "AI Signal Correlation" },
   { to: "/incident-area", icon: MapPinned, label: "Incident Location" },
   { to: "/intelligence", icon: Network, label: "Intelligence Monitoring" },
   { to: "/overview", icon: LayoutGrid, label: "Incident & Intel Overview" },
+] as const;
+
+const DEMO_LAB_NAV = [
+  { to: "/demo-lab/camera", icon: Camera, label: "Camera Detection" },
+  { to: "/demo-lab/cyber-scanner", icon: Radio, label: "Cyber Wildlife-Trade Scanner" },
+  { to: "/demo-lab/linked-cases", icon: GitFork, label: "Linked Case Investigation" },
+  { to: "/demo-lab/orchestrator", icon: PlaySquare, label: "Demo Orchestrator" },
 ] as const;
 
 function TopBar() {
@@ -90,23 +97,46 @@ function SideNavigation() {
   const loc = useLocation();
   const vk = useVk();
   return (
-    <nav className="z-20 flex w-14 shrink-0 flex-col items-center gap-1 border-r border-border bg-panel py-3">
-      {NAV.map(({ to, icon: I, label }) => {
+    <nav className="z-20 flex w-14 shrink-0 flex-col items-center gap-1 border-r border-border bg-panel py-2 overflow-y-auto overflow-x-hidden">
+      {/* Vankavach Core Navigation */}
+      {CORE_NAV.map(({ to, icon: I, label }) => {
         const active = loc.pathname === to;
         return (
-          <Link key={to} to={to} aria-label={label} className={cn("group relative grid h-10 w-10 place-items-center text-muted-foreground hover:text-foreground hover:bg-accent", active && "text-primary bg-primary/10 border-l-2 border-primary")}>
-            <I size={18} />
-            <span className="pointer-events-none absolute left-12 whitespace-nowrap vk-panel px-2 py-1 text-xs opacity-0 group-hover:opacity-100 text-foreground">{label}</span>
+          <Link key={to} to={to} aria-label={label} className={cn("group relative grid h-9 w-9 place-items-center text-muted-foreground hover:text-foreground hover:bg-accent rounded-sm", active && "text-primary bg-primary/10 border-l-2 border-primary")}>
+            <I size={17} />
+            <span className="pointer-events-none absolute left-12 whitespace-nowrap vk-panel px-2 py-1 text-xs opacity-0 group-hover:opacity-100 text-foreground z-50 shadow-lg">{label}</span>
           </Link>
         );
       })}
-      <button aria-label="Settings" onClick={() => vk.set({ settingsOpen: true })} className="group relative mt-auto grid h-10 w-10 place-items-center text-muted-foreground hover:text-foreground hover:bg-accent">
-        <Settings size={18} />
-        <span className="pointer-events-none absolute left-12 whitespace-nowrap vk-panel px-2 py-1 text-xs opacity-0 group-hover:opacity-100 text-foreground">Settings</span>
+
+      {/* DEMO LAB Section Divider */}
+      <div className="my-1.5 flex flex-col items-center w-full px-2">
+        <div className="h-px w-full bg-border" />
+        <span className="mt-1 font-mono text-[8px] font-bold text-primary/80 tracking-widest uppercase">LAB</span>
+      </div>
+
+      {/* DEMO LAB Navigation */}
+      {DEMO_LAB_NAV.map(({ to, icon: I, label }) => {
+        const active = loc.pathname === to;
+        return (
+          <Link key={to} to={to} aria-label={`Demo Lab: ${label}`} className={cn("group relative grid h-9 w-9 place-items-center text-muted-foreground hover:text-foreground hover:bg-accent rounded-sm", active && "text-primary bg-primary/15 border-l-2 border-primary ring-1 ring-primary/30")}>
+            <I size={17} className={active ? "text-primary" : ""} />
+            <span className="pointer-events-none absolute left-12 whitespace-nowrap vk-panel px-2.5 py-1 text-xs opacity-0 group-hover:opacity-100 text-foreground z-50 shadow-lg border border-primary/40">
+              <span className="text-[10px] font-mono text-primary mr-1.5 uppercase tracking-wider font-bold">[DEMO LAB]</span>
+              {label}
+            </span>
+          </Link>
+        );
+      })}
+
+      <button aria-label="Settings" onClick={() => vk.set({ settingsOpen: true })} className="group relative mt-auto grid h-9 w-9 place-items-center text-muted-foreground hover:text-foreground hover:bg-accent rounded-sm">
+        <Settings size={17} />
+        <span className="pointer-events-none absolute left-12 whitespace-nowrap vk-panel px-2 py-1 text-xs opacity-0 group-hover:opacity-100 text-foreground z-50 shadow-lg">Settings</span>
       </button>
     </nav>
   );
 }
+
 
 function SettingsModal() {
   const vk = useVk();

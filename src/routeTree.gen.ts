@@ -14,6 +14,10 @@ import { Route as CorrelationRouteImport } from './routes/correlation'
 import { Route as IncidentAreaRouteImport } from './routes/incident-area'
 import { Route as IntelligenceRouteImport } from './routes/intelligence'
 import { Route as OverviewRouteImport } from './routes/overview'
+import { Route as DemoLabCameraRouteImport } from './routes/demo-lab/camera'
+import { Route as DemoLabCyberScannerRouteImport } from './routes/demo-lab/cyber-scanner'
+import { Route as DemoLabLinkedCasesRouteImport } from './routes/demo-lab/linked-cases'
+import { Route as DemoLabOrchestratorRouteImport } from './routes/demo-lab/orchestrator'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +44,26 @@ const OverviewRoute = OverviewRouteImport.update({
   path: '/overview',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DemoLabCameraRoute = DemoLabCameraRouteImport.update({
+  id: '/demo-lab/camera',
+  path: '/demo-lab/camera',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoLabCyberScannerRoute = DemoLabCyberScannerRouteImport.update({
+  id: '/demo-lab/cyber-scanner',
+  path: '/demo-lab/cyber-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoLabLinkedCasesRoute = DemoLabLinkedCasesRouteImport.update({
+  id: '/demo-lab/linked-cases',
+  path: '/demo-lab/linked-cases',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoLabOrchestratorRoute = DemoLabOrchestratorRouteImport.update({
+  id: '/demo-lab/orchestrator',
+  path: '/demo-lab/orchestrator',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +71,10 @@ export interface FileRoutesByFullPath {
   '/incident-area': typeof IncidentAreaRoute
   '/intelligence': typeof IntelligenceRoute
   '/overview': typeof OverviewRoute
+  '/demo-lab/camera': typeof DemoLabCameraRoute
+  '/demo-lab/cyber-scanner': typeof DemoLabCyberScannerRoute
+  '/demo-lab/linked-cases': typeof DemoLabLinkedCasesRoute
+  '/demo-lab/orchestrator': typeof DemoLabOrchestratorRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +82,10 @@ export interface FileRoutesByTo {
   '/incident-area': typeof IncidentAreaRoute
   '/intelligence': typeof IntelligenceRoute
   '/overview': typeof OverviewRoute
+  '/demo-lab/camera': typeof DemoLabCameraRoute
+  '/demo-lab/cyber-scanner': typeof DemoLabCyberScannerRoute
+  '/demo-lab/linked-cases': typeof DemoLabLinkedCasesRoute
+  '/demo-lab/orchestrator': typeof DemoLabOrchestratorRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +94,34 @@ export interface FileRoutesById {
   '/incident-area': typeof IncidentAreaRoute
   '/intelligence': typeof IntelligenceRoute
   '/overview': typeof OverviewRoute
+  '/demo-lab/camera': typeof DemoLabCameraRoute
+  '/demo-lab/cyber-scanner': typeof DemoLabCyberScannerRoute
+  '/demo-lab/linked-cases': typeof DemoLabLinkedCasesRoute
+  '/demo-lab/orchestrator': typeof DemoLabOrchestratorRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/correlation' | '/incident-area' | '/intelligence' | '/overview'
+    | '/'
+    | '/correlation'
+    | '/incident-area'
+    | '/intelligence'
+    | '/overview'
+    | '/demo-lab/camera'
+    | '/demo-lab/cyber-scanner'
+    | '/demo-lab/linked-cases'
+    | '/demo-lab/orchestrator'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/correlation' | '/incident-area' | '/intelligence' | '/overview'
+  to:
+    | '/'
+    | '/correlation'
+    | '/incident-area'
+    | '/intelligence'
+    | '/overview'
+    | '/demo-lab/camera'
+    | '/demo-lab/cyber-scanner'
+    | '/demo-lab/linked-cases'
+    | '/demo-lab/orchestrator'
   id:
     | '__root__'
     | '/'
@@ -76,6 +129,10 @@ export interface FileRouteTypes {
     | '/incident-area'
     | '/intelligence'
     | '/overview'
+    | '/demo-lab/camera'
+    | '/demo-lab/cyber-scanner'
+    | '/demo-lab/linked-cases'
+    | '/demo-lab/orchestrator'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -84,6 +141,10 @@ export interface RootRouteChildren {
   IncidentAreaRoute: typeof IncidentAreaRoute
   IntelligenceRoute: typeof IntelligenceRoute
   OverviewRoute: typeof OverviewRoute
+  DemoLabCameraRoute: typeof DemoLabCameraRoute
+  DemoLabCyberScannerRoute: typeof DemoLabCyberScannerRoute
+  DemoLabLinkedCasesRoute: typeof DemoLabLinkedCasesRoute
+  DemoLabOrchestratorRoute: typeof DemoLabOrchestratorRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -123,6 +184,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OverviewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/demo-lab/camera': {
+      id: '/demo-lab/camera'
+      path: '/demo-lab/camera'
+      fullPath: '/demo-lab/camera'
+      preLoaderRoute: typeof DemoLabCameraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo-lab/cyber-scanner': {
+      id: '/demo-lab/cyber-scanner'
+      path: '/demo-lab/cyber-scanner'
+      fullPath: '/demo-lab/cyber-scanner'
+      preLoaderRoute: typeof DemoLabCyberScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo-lab/linked-cases': {
+      id: '/demo-lab/linked-cases'
+      path: '/demo-lab/linked-cases'
+      fullPath: '/demo-lab/linked-cases'
+      preLoaderRoute: typeof DemoLabLinkedCasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo-lab/orchestrator': {
+      id: '/demo-lab/orchestrator'
+      path: '/demo-lab/orchestrator'
+      fullPath: '/demo-lab/orchestrator'
+      preLoaderRoute: typeof DemoLabOrchestratorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -132,6 +221,10 @@ const rootRouteChildren: RootRouteChildren = {
   IncidentAreaRoute: IncidentAreaRoute,
   IntelligenceRoute: IntelligenceRoute,
   OverviewRoute: OverviewRoute,
+  DemoLabCameraRoute: DemoLabCameraRoute,
+  DemoLabCyberScannerRoute: DemoLabCyberScannerRoute,
+  DemoLabLinkedCasesRoute: DemoLabLinkedCasesRoute,
+  DemoLabOrchestratorRoute: DemoLabOrchestratorRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

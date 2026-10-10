@@ -48,7 +48,7 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 if (typeof window !== "undefined") {
-  delete (L.Icon.Default.prototype as Record<string, unknown>)["_getIconUrl"];
+  delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)["_getIconUrl"];
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: markerIcon2x,
     iconUrl: markerIcon,
@@ -113,7 +113,7 @@ function createIncidentIcon(): L.DivIcon {
 }
 
 // ── Map controller sub-component ────────────────────────────────────
-function MapController({ flyTo, flyZoom }: { flyTo?: LatLng | null; flyZoom?: number }) {
+function MapController({ flyTo, flyZoom }: { flyTo?: LatLng | null | undefined; flyZoom?: number | undefined }) {
   const map = useMap();
   useEffect(() => {
     if (flyTo) {
@@ -226,17 +226,17 @@ export type TadobaMapProps = {
   /** Show water body markers */
   showWater?: boolean;
   /** Show triangulation lines to incident */
-  showTriangulation?: boolean;
+  showTriangulation?: boolean | undefined;
   /** Fly the map to this position */
-  flyTo?: LatLng | null;
+  flyTo?: LatLng | null | undefined;
   /** Zoom level for flyTo */
-  flyZoom?: number;
+  flyZoom?: number | undefined;
   /** Default tile layer */
-  defaultTileLayer?: TileLayerKey;
+  defaultTileLayer?: TileLayerKey | undefined;
   /** Extra children rendered inside MapContainer */
-  children?: ReactNode;
+  children?: ReactNode | undefined;
   /** Overlay rendered above the map (absolute positioned) */
-  overlay?: ReactNode;
+  overlay?: ReactNode | undefined;
 };
 
 export function TadobaMap({
