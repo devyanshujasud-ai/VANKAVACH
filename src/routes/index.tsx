@@ -133,15 +133,15 @@ function Dashboard() {
 
       {/* MAP */}
       <div className="relative min-h-0 vk-panel overflow-hidden">
-        <div className="absolute left-3 top-3 z-10" style={{ zIndex: 1001 }}>
+        <div className="absolute left-3 top-3 z-10 vk-panel bg-panel/95 backdrop-blur-md p-3 border border-border/80 shadow-2xl max-w-sm rounded-sm" style={{ zIndex: 1001 }}>
           <Crumbs items={["VANKAVACH", "Monitoring", "Forest Map"]} />
-          <div className="vk-title mt-1 text-xl">Forest Monitoring Dashboard</div>
-          <div className="vk-label">{mapMode === "leaflet" ? "Tadoba-Andhari Tiger Reserve · Real geographic tiles" : "Tadoba-like fictional reserve · Grid 21°N 79°E"}</div>
-          <div className="mt-2 flex gap-1">
-            <button onClick={() => setMapMode("leaflet")} className={cn("px-2 py-1 font-mono text-[10px] border", mapMode === "leaflet" ? "border-primary text-primary bg-primary/10" : "border-border text-muted-foreground bg-panel")}>
+          <div className="vk-title mt-1 text-lg text-foreground font-bold">Forest Monitoring Dashboard</div>
+          <div className="vk-label text-[10px] text-muted-foreground">{mapMode === "leaflet" ? "Tadoba-Andhari Tiger Reserve · Real geographic tiles" : "Tadoba-like fictional reserve · Grid 21°N 79°E"}</div>
+          <div className="mt-2.5 flex gap-1">
+            <button onClick={() => setMapMode("leaflet")} className={cn("px-2.5 py-1 font-mono text-[10px] border rounded-sm transition-colors", mapMode === "leaflet" ? "border-primary text-primary bg-primary/15 font-semibold" : "border-border text-muted-foreground bg-panel hover:text-foreground")}>
               <Map size={11} className="inline mr-1" />REAL MAP
             </button>
-            <button onClick={() => setMapMode("terrain")} className={cn("px-2 py-1 font-mono text-[10px] border", mapMode === "terrain" ? "border-primary text-primary bg-primary/10" : "border-border text-muted-foreground bg-panel")}>
+            <button onClick={() => setMapMode("terrain")} className={cn("px-2.5 py-1 font-mono text-[10px] border rounded-sm transition-colors", mapMode === "terrain" ? "border-primary text-primary bg-primary/15 font-semibold" : "border-border text-muted-foreground bg-panel hover:text-foreground")}>
               <Layers size={11} className="inline mr-1" />TERRAIN
             </button>
           </div>

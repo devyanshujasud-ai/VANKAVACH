@@ -17,6 +17,7 @@ import {
   useMap,
   useMapEvents,
   LayersControl,
+  ZoomControl,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -291,13 +292,14 @@ export function TadobaMap({
         zoom={DEFAULT_ZOOM}
         minZoom={MIN_ZOOM}
         maxZoom={MAX_ZOOM}
-        zoomControl={true}
+        zoomControl={false}
         scrollWheelZoom={true}
         doubleClickZoom={true}
         dragging={true}
         style={{ height: "100%", width: "100%", background: "oklch(0.17 0.018 170)" }}
         whenReady={() => setReady(true)}
       >
+        <ZoomControl position="bottomright" />
         {/* Tile layers with layer control */}
         <LayersControl position="topright">
           {(Object.entries(TILE_LAYERS) as [TileLayerKey, typeof TILE_LAYERS[TileLayerKey]][]).map(

@@ -59,24 +59,24 @@ function IncidentArea() {
 
   const sharedOverlay = (
     <>
-      <div className="absolute left-5 top-5 z-20" style={{ zIndex: 1001 }}>
+      <div className="absolute left-5 top-5 z-20 vk-panel bg-panel/95 backdrop-blur-md p-4 border border-border/80 shadow-2xl max-w-lg rounded-sm" style={{ zIndex: 1001 }}>
         <Crumbs items={["VANKAVACH", "Correlation", "Incident Location"]} />
-        <h1 className="vk-title mt-1 text-3xl">Incident Location Analysis</h1>
-        <p className="text-sm text-muted-foreground">Correlated reports: 2 sensor nodes · Triangulated zone</p>
-        <div className="mt-2 flex items-center gap-2">
-          <VkButton size="sm" variant="ghost" onClick={() => nav({ to: "/correlation" })}>
+        <h1 className="vk-title mt-1.5 text-2xl text-foreground font-bold tracking-tight">Incident Location Analysis</h1>
+        <p className="text-xs font-mono text-muted-foreground mt-1">Correlated reports: 2 sensor nodes · Triangulated zone</p>
+        <div className="mt-3 flex items-center gap-2">
+          <VkButton size="sm" variant="alertOutline" onClick={() => nav({ to: "/correlation" })}>
             <ArrowLeft size={13} />Back to Correlation
           </VkButton>
-          <div className="flex gap-1">
+          <div className="flex gap-1 ml-auto">
             <button
               onClick={() => setMapMode("leaflet")}
-              className={cn("px-2 py-1 font-mono text-[10px] border", mapMode === "leaflet" ? "border-primary text-primary bg-primary/10" : "border-border text-muted-foreground bg-panel")}
+              className={cn("px-2.5 py-1 font-mono text-[10px] border rounded-sm transition-colors", mapMode === "leaflet" ? "border-primary text-primary bg-primary/15 font-semibold" : "border-border text-muted-foreground bg-panel hover:text-foreground")}
             >
               <Map size={11} className="inline mr-1" />REAL MAP
             </button>
             <button
               onClick={() => setMapMode("terrain")}
-              className={cn("px-2 py-1 font-mono text-[10px] border", mapMode === "terrain" ? "border-primary text-primary bg-primary/10" : "border-border text-muted-foreground bg-panel")}
+              className={cn("px-2.5 py-1 font-mono text-[10px] border rounded-sm transition-colors", mapMode === "terrain" ? "border-primary text-primary bg-primary/15 font-semibold" : "border-border text-muted-foreground bg-panel hover:text-foreground")}
             >
               <Layers size={11} className="inline mr-1" />TERRAIN
             </button>
