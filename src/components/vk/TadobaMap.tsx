@@ -46,12 +46,14 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
-delete (L.Icon.Default.prototype as Record<string, unknown>)["_getIconUrl"];
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: markerIcon2x,
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
-});
+if (typeof window !== "undefined") {
+  delete (L.Icon.Default.prototype as Record<string, unknown>)["_getIconUrl"];
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: markerIcon2x,
+    iconUrl: markerIcon,
+    shadowUrl: markerShadow,
+  });
+}
 
 // ── Custom marker icons ─────────────────────────────────────────────
 function createSvgIcon(color: string, size: number, glow = false): L.DivIcon {
@@ -254,6 +256,11 @@ export function TadobaMap({
   overlay,
 }: TadobaMapProps) {
   const [ready, setReady] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const getStatus = (id: string) => {
     if (sensorStatus) return sensorStatus(id);
@@ -267,6 +274,15 @@ export function TadobaMap({
     if (st === "offline") return "oklch(0.66 0.025 160)";
     return "oklch(0.76 0.11 168)";
   };
+
+  if (!mounted) {
+    return (
+      <div className={cn("relative overflow-hidden flex items-center justify-center bg-background/50", className)} style={{ minHeight: 400 }}>
+        <div className="font-mono text-xs text-muted-foreground animate-pulse">Initializing Tadoba GIS Engine...</div>
+        {overlay}
+      </div>
+    );
+  }
 
   return (
     <div className={cn("relative overflow-hidden", className)} style={{ minHeight: 400 }}>
